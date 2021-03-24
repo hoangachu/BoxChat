@@ -13,14 +13,16 @@ namespace ChatBox
 {
     public class Startup
     {
-        public static string connectionString = "Server=ADMIN;Database=ChatBot;Trusted_Connection=True;MultipleActiveResultSets=true";
+        public IConfiguration Configuration
+        { get; }
+        public static string connectionString = "";
+         /*"Server=ADMIN;Database=ChatBot;Trusted_Connection=True;MultipleActiveResultSets=true"*/
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            connectionString = Configuration.GetConnectionString("DefaultConnection").ToString();
         }
-
-        public IConfiguration Configuration { get; }
-
+   
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {

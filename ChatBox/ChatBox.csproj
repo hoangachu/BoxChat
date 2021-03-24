@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\microsoft\" />
+    <Folder Include="wwwroot\doc\" />
   </ItemGroup>
 
   <ItemGroup>

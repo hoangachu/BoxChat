@@ -1,4 +1,5 @@
-﻿<html>
+﻿@model ChatBox.Models.HistoryChat.ChatHistory
+<html>
 <head>
     <link href="~/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="~/js/bootstrap.min.js"></script>
@@ -13,10 +14,11 @@
         .bg-funky {
             background: #FF1744;
         }
+
         .mesgs {
-            height :600px;
-         
+            height: 600px;
         }
+
         .heading {
             color: #fff;
             margin: 30px;
@@ -31,7 +33,8 @@
             border: 1px solid #c4c4c4;
             clear: both;
             overflow: hidden;
-            width : 900px
+            width: 900px;
+            background-color: #FFD6DE
         }
 
         .top_spac {
@@ -205,38 +208,57 @@
             margin-top: 20px;
         }
 
-            .credit a {
-                color: #fff;
-                font-weight: 300;
-                letter-spacing: 2px;
-                border-bottom: dotted 1px;
-            }
+        .credit a {
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 2px;
+            border-bottom: dotted 1px;
+        }
 
-
+        input[type=text], select {
+            width: 70%;
+            padding: 6px 8px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
     </style>
 </head>
-<body >
-    <div class="container" >
+<body>
+    <div class="container">
         <div class="messaging">
-            <div class="inbox_msg">
+            <div class="inbox_msg border border-success">
 
                 <div class="mesgs">
                     <div class="msg_history">
                         <div class="incoming_msg" id="messagesList">
-                            <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
-                            <div class="received_msg">
-                                <div class="received_withd_msg">
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                    <span class="time_date">June 9</span>
-                                </div>
-                            </div>
+                            @foreach (var item in Model.ListHistoryMessage)
+                            {
+                                if (item.ChkUser == 1)
+                                {
+                                    <div class="incoming_msg_img"> <img src="@item.Images" alt="sunil"> </div>
+                                    <div class="received_msg">
+                                        <div class="received_withd_msg">
+                                            <p>@item.MessageSendText</p>
+                                            <span class="time_date">@item.SendTimer</span>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="outgoing_msg">
+                                        <div class="sent_msg">
+                                            <p>@item.MessageSendText</p>
+                                            <span class="time_date">@item.SendTimer @*11:01 AM    |    June 9*@</span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
                         </div>
-                        <div class="outgoing_msg">
-                            <div class="sent_msg">
-                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
-                                <span class="time_date"> 11:01 AM    |    June 9</span>
-                            </div>
-                        </div>
+
 
                     </div>
 
@@ -245,9 +267,14 @@
 
         </div>
         <form class="msger-inputarea mt-1">
-            <input type="text" class="msger-input" placeholder="Enter your message..." style="width:78%">
-            <button type="submit" class="msger-send-btn" id="btnSendMsg">Send</button>
+            <input type="text" class="msger-input" placeholder="Nhập gì thì nhập..." style="width:78%;height:30%">
+            <button class="btn" id="btnSendMsg">
+                <img src="~/images/send-mail.png" width="25" height="25" />
+            </button>
         </form>
-      
+
 </body>
 </html>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+<script src="~/js/ChatHistory/ChatHistory.js"></script>
