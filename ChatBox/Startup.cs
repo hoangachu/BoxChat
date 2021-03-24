@@ -42,6 +42,7 @@ namespace ChatBox
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -53,8 +54,9 @@ namespace ChatBox
             {
                 endpoints.MapHub<ChatHub>("/chatHub");
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "Login",
+                    pattern: "{controller=Home}/{action=Index}/{id}");
+                endpoints.MapControllerRoute("Login", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

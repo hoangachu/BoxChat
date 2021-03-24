@@ -9,6 +9,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ChatBox.Controllers
 {
@@ -37,7 +38,7 @@ namespace ChatBox.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         [HttpPost]
-        public IActionResult Login(string Username, string Password)
+        public ActionResult Login(string Username, string Password)
         {
             int i = 0;
             using (SqlConnection con = new SqlConnection(Startup.connectionString))
@@ -52,8 +53,8 @@ namespace ChatBox.Controllers
                         cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = Username;
                         cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = Multis.Multis.Encrypt(Password);
 
-                        con.Open();
-                        i = cmd.ExecuteNonQuery();
+                        //con.Open();
+                        //i = cmd.ExecuteNonQuery();
                     }
                 }
                 catch (Exception ex)
@@ -62,7 +63,8 @@ namespace ChatBox.Controllers
                 }
 
             }
-            return View();
+            return Ok(Json(new { data  = 1, url = "https://localhost:44347/ChatBot/ChatPreview" }));
+
         }
     }
 }
