@@ -8,7 +8,7 @@ namespace Multis
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!11");
+            Console.WriteLine("Hello World!");
         }
         static string key { get; set; } = "A!9HHhi%XjjYY4YP2@Nob009X";
 
