@@ -14,11 +14,12 @@ namespace ChatBox.Models.HistoryChat
     }
     public class HistoryMessage
     {
+        public int ChatMsgID { get; set; }
         public int UserID { get; set; }
         public int MsgNumber { get; set; }
         public int ChkUser { get; set; }
         public string MessageSendText { get; set; }
-        public string  Images { get; set; }
+        public string  ImagesUrl { get; set; }
         public string  SendTimer { get; set; }
     }
 }

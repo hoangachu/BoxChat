@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="~/css/User/main.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <title>jQuery Preview an Image Before it is Uploaded</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function previewFile(input) {
+            var file = $("input[type=file]").get(0).files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function () {
+                    $("#previewImg").attr("src", reader.result);
+                    $("#deleteimg").show();
+                }
+                $("#btndeleteimg").click(function () {
+                    $("#previewImg").attr("src", '');
+
+                });
+                reader.readAsDataURL(file);
+            }
+        }
+        $(document).ready(function () {
+            $("#deleteimg").hide();
+        });
+
+    </script>
+    <style>
+        .image-upload > input {
+            display: none;
+        }
+
+        .image-upload img {
+            width: 100px;
+            cursor: pointer;
+            margin-left : 45px;
+        }
+
+        .img-wrap {
+            position: relative;
+        }
+
+        .image-upload .imgdel {
+            margin-top: -40px;
+            width: 20px;
+        }
+
+        .btndelimg {
+            display: none;
+        }
+        .p {
+            
+        }
+    </style>
+</head>
+
+
+<body>
+    <form method="POST" id="form_user">
+        <div class="page-wrapper bg-dark p-t-100 p-b-50">
+            <div class="wrapper wrapper--w900">
+                <div class="card card-6">
+                    <div class="card-heading">
+                        <h2 class="title">Create account</h2>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-row">
+                            <div class="name">Username</div>
+                            <div class="value">
+                                <input class="input--style-6" type="text" id="Username">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Password</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="password" id="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Message</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <textarea class="textarea--style-6" name="message" placeholder="Message sent to the employer"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="image-upload img-wrap">
+                                <label for="file-input">
+                                    <img src="~/images/file_upload.png" id="previewImg" alt="Placeholder" />
+                                </label>
+                                <label for="btndeleteimg">
+                                    <img class="imgdel" src="~/images/delete.png" id="deleteimg" alt="Placeholder" style="" />
+                                </label>
+                                <button class="btndelimg" id="btndeleteimg"></button>
+                                <p class="text" style="color: #bb9d9d;">
+                                    Ấn vào ảnh để chọn ảnh khác!
+                                </p>
+                                <input type="file" value="Submit" onchange="previewFile(this);" id="file-input" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <button class="btn btn--radius-2 btn--blue-2" type="submit" id="btnRegistUser">Regist</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Jquery JS-->
+
+    <script src="~/js/User/jquery.min.js"></script>
+
+    <script src="~/js/User/global.js"></script>
+    <!-- Main JS-->
+
+    <script src="~/js/User/jquery.js"></script>
+    <script src="~/js/User/User.js"></script>
+</body>
+
+
+</html>

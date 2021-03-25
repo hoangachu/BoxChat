@@ -21,18 +21,9 @@ namespace ChatBox.Controllers
             ChatHistory ChatHistory = new ChatHistory();
             ChatHistory.UserID = SenderID;
             ChatHistory.ReceiverID = ReceiverID;
-            //ChatHistory.ListHistoryMessage = GetHistoryMessagesUser(SenderID, ReceiverID);
-            ChatHistory.ListHistoryMessage = new List<HistoryMessage>();
-            ChatHistory.ListHistoryMessage.Add(new HistoryMessage
-            {
-                ChkUser = 1,
-                MessageSendText = "anh yêu me",
-                SendTimer = "2019/09/24 14:21",
-                UserID = 12,
-                MsgNumber = 1,
-                Images="/images/messenger.jpg"
-
-            });
+            ChatHistory.ListHistoryMessage = GetHistoryMessagesUser(SenderID, ReceiverID);
+           
+       
             return View(ChatHistory);
 
         }
@@ -41,7 +32,7 @@ namespace ChatBox.Controllers
             List<HistoryMessage> lstHistoryMessage = new List<HistoryMessage>();
             using (SqlConnection con = new SqlConnection(Startup.connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("Add_User", con))
+                using (SqlCommand cmd = new SqlCommand("GetList_Message", con))
                 {
                     {
                         try
@@ -57,7 +48,7 @@ namespace ChatBox.Controllers
                                 historyMessage.UserID = (Int32)dr["UserID"];
                                 historyMessage.MessageSendText = (string)dr["MessageSendText"];
                                 historyMessage.SendTimer = (string)dr["SendTimer"];
-                                historyMessage.Images = (string)dr["Images"];
+                                historyMessage.ImagesUrl = (string)dr["ImagesUrl"];
                             }
                         }
                         catch (Exception e)

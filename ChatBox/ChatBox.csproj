@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\doc\**" />
+    <Content Remove="wwwroot\doc\**" />
+    <EmbeddedResource Remove="wwwroot\doc\**" />
+    <None Remove="wwwroot\doc\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\microsoft\" />
-    <Folder Include="wwwroot\doc\" />
   </ItemGroup>
 
   <ItemGroup>
