@@ -21,22 +21,18 @@ function readURL(input) {
 
 
 $("#btnRegistUser").click(function () {
-    var reader = new FileReader();
-/*var file = $('#file-input')[0].files[0];*/
-    var formData = new FormData($('#form_user')[0]);
+    var myfile = document.getElementById("file-input");
+    uploadfile(myfile);
+ 
     var Username = $("#Username").val();
     var Password = $("#Password").val();
-    formData.append('image', $('input[type=file]')[0].files[0]); 
-    formData.append('Username', Username); 
-    formData.append('Password', Password); 
-    /*var formData = new FormData('image', $('input[type=file]')[0].files[0]);*/
     
     
     $.ajax({
 
         url: "User/RegistUser",
         type: 'POST',
-        data: {/* Username: Username, Password: Password,*/ base64img: formData },
+        data: { Username: Username, Password: Password},
         cache: false,
         processData: false,
         success: function (result) {
@@ -51,15 +47,7 @@ $("#btnRegistUser").click(function () {
 
     });
 
-   
-
-
 });
-function encodeImageFileAsURL(element) {
-    var file = element.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function () {
-        imagebase64 = reader.result;
-    }
-    reader.readAsDataURL(file);
-} 
+
+
+

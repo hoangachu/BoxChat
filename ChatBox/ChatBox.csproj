@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\microsoft\" />
+    <Folder Include="wwwroot\document\" />
   </ItemGroup>
 
   <ItemGroup>

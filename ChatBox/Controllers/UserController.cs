@@ -17,31 +17,28 @@ namespace ChatBox.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
-        public int RegistUser(IFormCollection base64img)
+        public int RegistUser(string UserName, string Password)
         {
             int i = 0;
-            var UserName = base64img["UserName"];
             try
             {
                 using (SqlConnection con = new SqlConnection(Startup.connectionString))
                 {
                     using (SqlCommand cmd = new SqlCommand("Add_User", con))
                     {
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        //cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                         //cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = UserName;
                         //cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = Multis.Multis.Encrypt(Password);
 
-                        con.Open();
-                        i = cmd.ExecuteNonQuery();
+                        //con.Open();
+                        //i = cmd.ExecuteNonQuery();
                     }
                 }
-                //if (!string.IsNullOrEmpty(base64img))
-                //{
-                //    string filePath = "MyImage.jpg";
-                //    System.IO.File.WriteAllBytes(filePath, Convert.FromBase64String(base64img));
-                //}
+
             }
             catch (Exception ex)
             {
