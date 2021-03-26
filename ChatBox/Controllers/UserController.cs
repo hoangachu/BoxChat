@@ -20,8 +20,9 @@ namespace ChatBox.Controllers
 
 
         [HttpPost]
-        public int RegistUser(string UserName, string Password)
+        public IActionResult RegistUser(string UserName, string Password)
         {
+            int UserID = 0;
             int i = 0;
             try
             {
@@ -29,13 +30,14 @@ namespace ChatBox.Controllers
                 {
                     using (SqlCommand cmd = new SqlCommand("Add_User", con))
                     {
-                        //cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        //cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = UserName;
-                        //cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = Multis.Multis.Encrypt(Password);
-
-                        //con.Open();
-                        //i = cmd.ExecuteNonQuery();
+                        cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = UserName;
+                        cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = Multis.Multis.Encrypt(Password);
+                        cmd.Parameters.Add("@UserID", SqlDbType.Int).Direction = ParameterDirection.Output;
+                        con.Open();
+                         i = cmd.ExecuteNonQuery();
+                        UserID = Convert.ToInt32(cmd.Parameters["@UserID"].Value);
                     }
                 }
 
@@ -44,7 +46,7 @@ namespace ChatBox.Controllers
             {
                 throw ex;
             }
-            return i;
+            return Ok(new { data = i, userID = UserID });
         }
     }
 }

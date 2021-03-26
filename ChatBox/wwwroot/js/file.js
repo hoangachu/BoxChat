@@ -1,4 +1,4 @@
-﻿function uploadfile(myfile) {
+﻿function uploadfile(myfile, userID) {
 
     var formData = new FormData();
 
@@ -7,7 +7,7 @@
             formData.append('file', myfile.files[i]);
         }
     }
-
+    formData.append('userID', userID);
     $.ajax({
         url: "/File/SaveFile/",
         type: "POST",
@@ -15,7 +15,13 @@
         data: formData,
         contentType: false,
         processData: false,
+        async: false,
         success: function (data) {
+            if (data.data > 0) {
+              
+            }
+            else {
+            }
 
         },
         error: function (data) {

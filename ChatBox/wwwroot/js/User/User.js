@@ -1,7 +1,13 @@
-﻿
+﻿/*/*const { Toast } = require("bootstrap");*/
+
+const REGIST_SUCCESS = 1;
 $(document).ready(function () {
 
-
+    $.notify("Your Break is Approved", {
+        style: 'happyblue',
+        className: 'superblue', // <-- just a comma, but really important
+        title: "E-Contact Application"
+    });
 
 
 });
@@ -22,7 +28,7 @@ function readURL(input) {
 
 $("#btnRegistUser").click(function () {
     var myfile = document.getElementById("file-input");
-    uploadfile(myfile);
+    
  
     var Username = $("#Username").val();
     var Password = $("#Password").val();
@@ -32,14 +38,17 @@ $("#btnRegistUser").click(function () {
 
         url: "User/RegistUser",
         type: 'POST',
+        async: false,
         data: { Username: Username, Password: Password},
-        cache: false,
-        processData: false,
+        
         success: function (result) {
           
-            if (result.value.data == ACCEPT_LOGIN) {
-              
-                window.open(result.value.url, '_self')
+            if (result.data == REGIST_SUCCESS) {
+                toastr.success('Regist success');
+                /*toastr.info('Are you the 6 fingered man?');*/
+                uploadfile(myfile, result.userID);
+               
+                
             }
 
         }

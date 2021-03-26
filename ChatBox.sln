@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBox", "ChatBox\ChatBox.csproj", "{A2C1E3E9-059E-47B1-B71E-E13B3B6DF3AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Multis", "Multis\Multis.csproj", "{07A7B531-7ACF-429E-A94F-AFD01E42FCA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Multis", "Multis\Multis.csproj", "{07A7B531-7ACF-429E-A94F-AFD01E42FCA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
