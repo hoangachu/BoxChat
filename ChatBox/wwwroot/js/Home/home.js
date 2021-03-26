@@ -1,28 +1,21 @@
-﻿
+﻿const ACCEPT_LOGIN = 1;
 $(document).ready(function () {
 
 
 
+    $(".toggle-password").click(function () {
 
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
 });
 
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#blah').attr('src', e.target.result);
-        }
-   
-        reader.readAsDataURL(input.files[0]); // convert to base64 string
-    }
-}
-
-
-$("#btnRegistUser").click(function () {
-    var myfile = document.getElementById("file-input");
-    uploadfile(myfile);
+$("#btnlogin").click(function () {
  
     var Username = $("#Username").val();
     var Password = $("#Password").val();
@@ -30,7 +23,7 @@ $("#btnRegistUser").click(function () {
     
     $.ajax({
 
-        url: "User/RegistUser",
+        url: "Home/Login",
         type: 'POST',
         data: { Username: Username, Password: Password},
         cache: false,

@@ -50,8 +50,8 @@ namespace ChatBox.Controllers
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = Username;
-                        cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = Multis.Multis.Encrypt(Password);
+                        //cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = Username;
+                        //cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = Multis.Multis.Encrypt(Password);
 
                         //con.Open();
                         //i = cmd.ExecuteNonQuery();
