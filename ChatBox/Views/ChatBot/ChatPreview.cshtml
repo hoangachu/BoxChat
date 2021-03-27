@@ -7,8 +7,41 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
     <style>
+        ::-webkit-scrollbar {
+            -webkit-appearance: none;
+            width: 7px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(0, 0, 0, .5);
+            box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+        }
+        ::-webkit-scrollbar {
+            width: 3px;
+          margin-right:-10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: red;
+            border-radius: 10px;
+        }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #b30000;
+            }
+
         body {
             font-family: sans-serif !important;
+            background-image: url('/images/back_ground.jpg');
         }
 
         .bg-funky {
@@ -33,8 +66,7 @@
             border: 1px solid #c4c4c4;
             clear: both;
             overflow: hidden;
-            width: 900px;
-            background-color: #FFD6DE
+            background-image: url('/images/background_w2.jpg');
         }
 
         .top_spac {
@@ -106,10 +138,17 @@
         .active_chat {
             background: #ebebeb;
         }
-
+        .incoming_msg{
+            width:1000px;
+        }
         .incoming_msg_img {
             display: inline-block;
-            width: 6%;
+            width: 4%;
+        }
+
+        .imgbor {
+            border-radius: 50%;
+            margin-bottom: 4px;
         }
 
         .received_msg {
@@ -123,10 +162,15 @@
             background: #e4e8fb none repeat scroll 0 0;
             border-radius: 3px;
             color: #646464;
-            font-size: 14px;
+            font-size: 17px;
             margin: 0;
             padding: 5px 10px 5px 12px;
-            width: 100%;
+            width: 80%;
+            word-wrap: break-word;
+            overflow: hidden;
+            display: block;
+            max-width: 300px;
+            margin-block: auto
         }
 
         .time_date {
@@ -146,7 +190,7 @@
         }
 
         .sent_msg p {
-            background: #3F51B5 none repeat scroll 0 0;
+            background: #deb3b3 none repeat scroll 0 0;
             border-radius: 3px;
             font-size: 14px;
             margin: 0;
@@ -162,8 +206,11 @@
 
         .sent_msg {
             float: right;
+            margin-left: 894px;
             width: 70%;
             text-align: right;
+            max-width: 340px;
+            margin-right:50px;
         }
 
         .input_msg_write input {
@@ -201,6 +248,8 @@
         .msg_history {
             max-height: 516px;
             overflow-y: auto;
+            max-width:1050px;
+            display:inline-block;
         }
 
         .credit {
@@ -208,12 +257,12 @@
             margin-top: 20px;
         }
 
-        .credit a {
-            color: #fff;
-            font-weight: 300;
-            letter-spacing: 2px;
-            border-bottom: dotted 1px;
-        }
+            .credit a {
+                color: #fff;
+                font-weight: 300;
+                letter-spacing: 2px;
+                border-bottom: dotted 1px;
+            }
 
         input[type=text], select {
             width: 70%;
@@ -229,6 +278,8 @@
 <body>
     <div class="container">
         <div class="messaging">
+
+            <input style="display:none" value="@ViewBag.imgURL">
             <div class="inbox_msg border border-success">
 
                 <div class="mesgs">
@@ -238,20 +289,25 @@
                             {
                                 if (item.ChkUser == 1)
                                 {
-                                    <div class="incoming_msg_img"> <img src="@item.ImagesUrl" alt="sunil"> </div>
-                                    <div class="received_msg">
-                                        <div class="received_withd_msg">
-                                            <p>@item.MessageSendText</p>
-                                            <span class="time_date">@item.SendTimer</span>
+                                    <div>
+                                        <div class="incoming_msg_img"> <img src="@item.ImagesUrl" alt="sunil" class="imgbor"> </div>
+                                        <div class="received_msg">
+                                            <div class="received_withd_msg">
+                                                <p>@item.MessageSendText</p>
+                                                <span class="time_date">@item.SendTimer</span>
+                                            </div>
                                         </div>
                                     </div>
                                 }
                                 else
-                                {
-                                    <div class="outgoing_msg">
-                                        <div class="sent_msg">
-                                            <p>@item.MessageSendText</p>
-                                            <span class="time_date">@item.SendTimer @*11:01 AM    |    June 9*@</span>
+
+
+                                { <div>
+                                        <div class="outgoing_msg">
+                                            <div class="sent_msg">
+                                                <p>@item.MessageSendText</p>
+                                                <span class="time_date">@item.SendTimer @*11:01 AM    |    June 9*@</span>
+                                            </div>
                                         </div>
                                     </div>
                                 }
@@ -267,12 +323,13 @@
 
         </div>
         <form class="msger-inputarea mt-1">
-            <input type="text" class="msger-input" placeholder="Nhập gì thì nhập..." style="width:78%;height:30%">
+            <input type="text" class="msger-input" placeholder="Nhập gì thì nhập..." style="width:94%;height:30%" id="messageInput">
             <button class="btn" id="btnSendMsg">
                 <img src="~/images/send-mail.png" width="25" height="25" />
             </button>
         </form>
 
+    </div>
 </body>
 </html>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>

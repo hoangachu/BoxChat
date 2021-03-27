@@ -20,6 +20,6 @@ namespace ChatBox.Models.HistoryChat
         public int ChkUser { get; set; }
         public string MessageSendText { get; set; }
         public string  ImagesUrl { get; set; }
-        public string  SendTimer { get; set; }
+        public DateTime SendTimer { get; set; }
     }
 }

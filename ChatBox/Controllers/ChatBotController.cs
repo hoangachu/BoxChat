@@ -11,6 +11,11 @@ namespace ChatBox.Controllers
 {
     public class ChatBotController : Controller
     {
+        UserController _UserController;
+        public ChatBotController(UserController UserController)
+        {
+            _UserController = UserController;
+        }
         public IActionResult Index()
         {
             return View();
@@ -19,11 +24,13 @@ namespace ChatBox.Controllers
         public IActionResult ChatPreview(int SenderID, int ReceiverID)
         {
             ChatHistory ChatHistory = new ChatHistory();
+            var User = _UserController.GetUserByUserID(SenderID);
             ChatHistory.UserID = SenderID;
             ChatHistory.ReceiverID = ReceiverID;
             ChatHistory.ListHistoryMessage = GetHistoryMessagesUser(SenderID, ReceiverID);
-           
-       
+            ViewBag.imgURL = User.imgURL;
+
+
             return View(ChatHistory);
 
         }
@@ -47,8 +54,9 @@ namespace ChatBox.Controllers
                                 HistoryMessage historyMessage = new HistoryMessage();
                                 historyMessage.UserID = (Int32)dr["UserID"];
                                 historyMessage.MessageSendText = (string)dr["MessageSendText"];
-                                historyMessage.SendTimer = (string)dr["SendTimer"];
+                                historyMessage.SendTimer = (DateTime)dr["SendTimer"];
                                 historyMessage.ImagesUrl = (string)dr["ImagesUrl"];
+                                lstHistoryMessage.Add(historyMessage);
                             }
                         }
                         catch (Exception e)

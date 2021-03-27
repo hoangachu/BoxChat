@@ -7,9 +7,14 @@ namespace ChatBox.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(string user, string message)
+        const int CheckUser = 1;
+        public async Task SendMessage(string user, string message,string imgURL)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            if (!string.IsNullOrEmpty(message))
+            {
+                await Clients.All.SendAsync("ReceiveMessage", user, message, CheckUser, imgURL);
+            }
+
         }
     }
 }

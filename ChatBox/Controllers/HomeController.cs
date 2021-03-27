@@ -16,10 +16,11 @@ namespace ChatBox.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        UserController userController;
+        public HomeController(ILogger<HomeController> logger, UserController userController)
         {
             _logger = logger;
+            userController = userController;
         }
 
         public IActionResult Index()
@@ -41,21 +42,13 @@ namespace ChatBox.Controllers
         public ActionResult Login(string Username, string Password)
         {
             int i = 0;
+            User user = new User();
             using (SqlConnection con = new SqlConnection(Startup.connectionString))
             {
 
                 try
                 {
-                    using (SqlCommand cmd = new SqlCommand("Add_User", con))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        //cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = Username;
-                        //cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = Multis.Multis.Encrypt(Password);
-
-                        //con.Open();
-                        //i = cmd.ExecuteNonQuery();
-                    }
+                     user = userController.GetUserByUserName(Username);
                 }
                 catch (Exception ex)
                 {
@@ -63,7 +56,7 @@ namespace ChatBox.Controllers
                 }
 
             }
-            return Ok(Json(new { data  = 1, url = "https://localhost:44347/ChatBot/ChatPreview" }));
+            return Ok(Json(new { data  = 1, url = "/ChatBot/ChatPreview?UserID="+ user.UserID + "&&ReceiverID=0" }));
 
         }
     }

@@ -12,6 +12,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Views\ChatBot\Lan.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\ChatBot\Lan.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\microsoft\" />
     <Folder Include="wwwroot\document\" />
   </ItemGroup>

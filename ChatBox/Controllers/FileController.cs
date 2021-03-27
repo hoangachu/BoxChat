@@ -13,7 +13,7 @@ namespace ChatBox.Controllers
 {
     public class FileController : Controller
     {
-        private IWebHostEnvironment _hostingEnvironment;
+        private static IWebHostEnvironment _hostingEnvironment;
         public FileController(IWebHostEnvironment environment)
         {
             _hostingEnvironment = environment;
@@ -23,7 +23,7 @@ namespace ChatBox.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult SaveFile([FromForm(Name = "file")] IFormFile file, [FromForm(Name = "userID")] int userID)
+        public static void SaveFile([FromForm(Name = "file")] IFormFile file,int userID)
         {
             var i = 0;
             string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "document");
@@ -50,7 +50,7 @@ namespace ChatBox.Controllers
                 }
             }
             
-                return Ok(new { data = i });
+                //return Ok(new { data = i });
             
         }
     }

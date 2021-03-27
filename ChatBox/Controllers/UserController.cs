@@ -18,9 +18,82 @@ namespace ChatBox.Controllers
             return View();
         }
 
+        public User GetUserByUserID(int UserID)
+        {
+            User User = new User();
+            using (SqlConnection con = new SqlConnection(Startup.connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("GetUserByUserID", con))
+                {
+                    {
+                        try
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            con.Open();
+                            cmd.Parameters.Add("@UserID", SqlDbType.VarChar).Value = UserID;
+                            
+                            SqlDataReader dr = cmd.ExecuteReader();
 
+
+                            User.UserName = (string)dr["UserName"];
+                            User.Password = (string)dr["Password"];
+                            User.UserID = (int)dr["UserID"];
+                            User.imgURL = (string)dr["FileURL"];
+                                
+                            
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
+
+                        con.Close();
+                    }
+
+
+                }
+            }
+            return User;
+        }
+        public User GetUserByUserName(string UserName)
+        {
+            User User = new User();
+            using (SqlConnection con = new SqlConnection(Startup.connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("GetUserByUserName", con))
+                {
+                    {
+                        try
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            con.Open();
+                            cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = UserName;
+
+                            SqlDataReader dr = cmd.ExecuteReader();
+
+
+                            User.UserName = (string)dr["UserName"];
+                            User.Password = (string)dr["Password"];
+                            User.UserID = (int)dr["UserID"];
+                            User.imgURL = (string)dr["FileURL"];
+
+
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
+
+                        con.Close();
+                    }
+
+
+                }
+            }
+            return User;
+        }
         [HttpPost]
-        public IActionResult RegistUser(string UserName, string Password)
+        public IActionResult RegistUser([FromForm(Name = "file")] IFormFile file, [FromForm(Name = "UserName")] string UserName, [FromForm(Name = "Password")] string Password)
         {
             int UserID = 0;
             int i = 0;
@@ -38,6 +111,7 @@ namespace ChatBox.Controllers
                         con.Open();
                          i = cmd.ExecuteNonQuery();
                         UserID = Convert.ToInt32(cmd.Parameters["@UserID"].Value);
+                        FileController.SaveFile(file, UserID);
                     }
                 }
 
@@ -46,7 +120,7 @@ namespace ChatBox.Controllers
             {
                 throw ex;
             }
-            return Ok(new { data = i, userID = UserID });
+            return Ok(new { data = i, userID = UserID,url= "Home" });
         }
     }
 }
