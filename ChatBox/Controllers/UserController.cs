@@ -33,12 +33,15 @@ namespace ChatBox.Controllers
                             cmd.Parameters.Add("@UserID", SqlDbType.VarChar).Value = UserID;
                             
                             SqlDataReader dr = cmd.ExecuteReader();
+                            while (dr.Read())
+                            {
+                                User.UserName = (string)dr["UserName"];
+                                User.Password = (string)dr["Password"];
+                                User.UserID = (int)dr["UserID"];
+                                User.imgURL = (string)dr["FileURL"];
+                            }
 
-
-                            User.UserName = (string)dr["UserName"];
-                            User.Password = (string)dr["Password"];
-                            User.UserID = (int)dr["UserID"];
-                            User.imgURL = (string)dr["FileURL"];
+                           
                                 
                             
                         }
@@ -71,11 +74,14 @@ namespace ChatBox.Controllers
 
                             SqlDataReader dr = cmd.ExecuteReader();
 
-
-                            User.UserName = (string)dr["UserName"];
-                            User.Password = (string)dr["Password"];
-                            User.UserID = (int)dr["UserID"];
-                            User.imgURL = (string)dr["FileURL"];
+                            while (dr.Read())
+                            {
+                                User.UserName = (string)dr["UserName"];
+                                User.Password = (string)dr["Password"];
+                                User.UserID = (int)dr["UserID"];
+                                User.imgURL = (string)dr["FileURL"];
+                            }
+                          
 
 
                         }

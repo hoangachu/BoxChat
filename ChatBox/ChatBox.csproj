@@ -12,19 +12,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Views\ChatBot\Lan.jpg" />
+    <Content Remove="Views\Emoji\index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Views\ChatBot\Lan.jpg">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
+    <Folder Include="Views\Emoji\" />
     <Folder Include="wwwroot\microsoft\" />
     <Folder Include="wwwroot\document\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\ChatBot\Emoji.cshtml" />
+    <None Include="wwwroot\css\cssemoji\emoji.css.map" />
+    <None Include="wwwroot\js\jsemoji\config.js" />
+    <None Include="wwwroot\js\jsemoji\emoji-picker.coffee" />
+    <None Include="wwwroot\js\jsemoji\emoji-picker.js" />
+    <None Include="wwwroot\js\jsemoji\emoji-picker.js.map" />
+    <None Include="wwwroot\js\jsemoji\jquery.emojiarea.js" />
+    <None Include="wwwroot\js\jsemoji\util.js" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,27 +11,31 @@ namespace ChatBox.Controllers
 {
     public class ChatBotController : Controller
     {
-        UserController _UserController;
-        public ChatBotController(UserController UserController)
-        {
-            _UserController = UserController;
-        }
+        UserController _UserController = new UserController();
+       
         public IActionResult Index()
         {
             return View();
         }
         [HttpGet]
-        public IActionResult ChatPreview(int SenderID, int ReceiverID)
+        public IActionResult ChatPreview(int UserID, int ReceiverID)
         {
             ChatHistory ChatHistory = new ChatHistory();
-            var User = _UserController.GetUserByUserID(SenderID);
-            ChatHistory.UserID = SenderID;
+            var User = _UserController.GetUserByUserID(UserID);
+            ChatHistory.UserID = UserID;
             ChatHistory.ReceiverID = ReceiverID;
-            ChatHistory.ListHistoryMessage = GetHistoryMessagesUser(SenderID, ReceiverID);
+            ChatHistory.ListHistoryMessage = GetHistoryMessagesUser(UserID, ReceiverID);
             ViewBag.imgURL = User.imgURL;
-
-
+            ViewBag.UserID = User.UserID;
+            ViewBag.UserName = User.UserName;
             return View(ChatHistory);
+
+        } 
+        [HttpGet]
+        public IActionResult Emoji()
+        {
+            
+            return View();
 
         }
         public List<HistoryMessage> GetHistoryMessagesUser(int SenderID, int ReceiverID)
@@ -54,7 +58,8 @@ namespace ChatBox.Controllers
                                 HistoryMessage historyMessage = new HistoryMessage();
                                 historyMessage.UserID = (Int32)dr["UserID"];
                                 historyMessage.MessageSendText = (string)dr["MessageSendText"];
-                                historyMessage.SendTimer = (DateTime)dr["SendTimer"];
+                                var sendtimer= (DateTime)dr["SendTimer"];
+                                historyMessage.SendTimer = sendtimer== null? DateTime.Now.ToString("{0:MM/dd/yyyy}"):sendtimer.ToString("{0:MM/dd/yyyy}"); 
                                 historyMessage.ImagesUrl = (string)dr["ImagesUrl"];
                                 lstHistoryMessage.Add(historyMessage);
                             }

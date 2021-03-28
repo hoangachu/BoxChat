@@ -16,11 +16,10 @@ namespace ChatBox.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        UserController userController;
-        public HomeController(ILogger<HomeController> logger, UserController userController)
+        UserController UserController = new UserController();
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            userController = userController;
         }
 
         public IActionResult Index()
@@ -45,19 +44,36 @@ namespace ChatBox.Controllers
             User user = new User();
             using (SqlConnection con = new SqlConnection(Startup.connectionString))
             {
-
-                try
+               
+                if (ModelState.IsValid)
                 {
-                     user = userController.GetUserByUserName(Username);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
+                    try
+                    {
+                        user = UserController.GetUserByUserName(Username);
+                        var password = "";
+                        if (!string.IsNullOrEmpty(user.Password))
+                        {
+                            password = Multis.Multis.Decrypt(user.Password).ToLower();
+                        }
+
+                        if (password.ToLower().Equals(Password.ToLower()))
+                        {
+                            i = 1;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
 
+                return Ok(Json(new { data = i, url = "/ChatBot/ChatPreview?UserID=" + user.UserID + "&&ReceiverID=0" }));
+                //return Ok(Json(new { data = i, url = "/ChatBot/Emoji" }));
             }
-            return Ok(Json(new { data  = 1, url = "/ChatBot/ChatPreview?UserID="+ user.UserID + "&&ReceiverID=0" }));
-
         }
+
     }
+
+
 }
+

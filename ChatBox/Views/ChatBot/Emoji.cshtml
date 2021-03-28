@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- Begin emoji-picker Stylesheets -->
+    <link href="css/emoji.css" rel="stylesheet">
+    <!-- End emoji-picker Stylesheets -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+        
+        h3 {
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+        
+        body {
+            background: #192520;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            text-shadow: 1px 1px 1px black;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        body:after {
+            content: '';
+            position: absolute;
+            top: 0%;
+            left: 30%;
+            background: #bb3535;
+            width: 40%;
+            height: 100%;
+            z-index: -1;
+            transform: skew(-20deg)
+        }
+        
+        .custom-container {
+            max-width: 70%;
+            margin: 100px auto;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="custom-container">
+        <h3>Emoji Picker</h3>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <div class="text-left">
+
+                        <p class="lead emoji-picker-container">
+                            <textarea class="form-control textarea-control" rows="3" placeholder="Textarea with emoji image input" data-emojiable="true"></textarea>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Begin emoji-picker JavaScript -->
+    <script src="~/js/jsemoji/config.js"></script>
+    <script src="~/js/jsemoji/util.js"></script>
+    <script src="~/js/jsemoji/jquery.emojiarea.js"></script>
+    <script src="~/js/jsemoji/emoji-picker.js"></script>
+    <!-- End emoji-picker JavaScript -->
+
+    <script>
+        $(function () {
+            // Initializes and creates emoji set from sprite sheet
+            window.emojiPicker = new EmojiPicker({
+                emojiable_selector: '[data-emojiable=true]',
+                assetsPath: 'images/img/',
+                popupButtonClasses: 'fa fa-smile-o',
+                position: 'top-start'
+            });
+            // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+            // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+            // It can be called as many times as necessary; previously converted input fields will not be converted again
+            window.emojiPicker.discover();
+        });
+    </script>
+</body>
+
+</html>

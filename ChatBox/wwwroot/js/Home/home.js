@@ -16,25 +16,26 @@ $(document).ready(function () {
 });
 
 $("#btnlogin").click(function () {
- 
+
     var Username = $("#Username").val();
     var Password = $("#Password").val();
-    
-    
+
+
     $.ajax({
 
         url: "Home/Login",
         type: 'POST',
-        data: { Username: Username, Password: Password},
+        data: { Username: Username, Password: Password },
         cache: false,
-        processData: false,
         success: function (result) {
-          
+
             if (result.value.data == ACCEPT_LOGIN) {
-              
+
                 window.open(result.value.url, '_self')
             }
-
+            else {
+                toastr.error('Username or Password not correct.Try against!');
+            }
         }
 
 
