@@ -20,9 +20,11 @@
             -webkit-appearance: none;
             width: 7px;
         }
-        .msger-input{
-            width:95%;
+
+        .msger-input {
+            width: 95%;
         }
+
         ::-webkit-scrollbar-thumb {
             border-radius: 4px;
             background-color: rgba(0, 0, 0, .5);
@@ -211,7 +213,7 @@
             color: rgba(0, 0, 0, .5);
             padding: 5px 10px 5px 12px;
             width: 100%;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
         }
 
         .outgoing_msg {
@@ -353,10 +355,10 @@
 
                 </div>
             </div>
-                
+
         </div>
         <form class="msger-inputarea mt-1">
-            <input type="text" class="msger-input" placeholder="Nhập gì thì nhập..." style="width:94%;height:30%" id="messageInput">
+            <input type="text" class="msger-input" placeholder="Nhập gì thì nhập..." style="width:94%;height:30%" id="messageInput" onkeyup="keyUp(event)">
             <button class="btn" id="btnSendMsg" style="float:right;margin-top  :-38px;">
                 <img src="~/images/send-mail.png" width="25" height="25" />
             </button>
@@ -367,11 +369,20 @@
         $(document).ready(function () {
             $("#messageInput").emojioneArea({
                 pickerPosition: "top",
-                tonesStyle: "radio"
+                tonesStyle: "radio",
+                events: {
+                    keyup: function (editor, event) {
+                      
+                    },
+                    keydown: function (editor, event) {
+                      
+                    }
+                }
             });
 
-        });
 
+        });
+       
 
     </script>
 </body>

@@ -44,6 +44,7 @@ connection.on("ReceiveMessage", function (userIDSend, user, message, ckUser, img
         document.getElementById("messagesList").appendChild(div4);
         
     }
+    $(".emojionearea-editor").html('');
     $("#messageInput").val('');
     $('.inbox_msg  .mesgs .msg_history').scrollTop($('.inbox_msg  .mesgs .msg_history')[0].scrollHeight);
 });
@@ -64,6 +65,7 @@ document.getElementById("btnSendMsg").addEventListener("click", function (event)
     });
     event.preventDefault();
 });
+
 function scrollToLatestChatMessage(chatContainer) {
     console.log("Entry::scrollToLatestChatMessage in chat.js " + chatContainer);
     $(".msg_container_base").animate({
