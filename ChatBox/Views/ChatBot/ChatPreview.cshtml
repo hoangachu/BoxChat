@@ -186,7 +186,8 @@
             overflow: hidden;
             display: block;
             max-width: 300px;
-            margin-block: auto
+            margin-block: auto;
+            word-wrap: break-word;
         }
 
         .time_date {
@@ -208,12 +209,13 @@
         .sent_msg p {
             background: #90e7ff none repeat scroll 0 0;
             border-radius: 3px;
-            font-size: 14px;
+            font-size: 19px;
             margin: 0;
-            color: rgba(0, 0, 0, .5);
+            color: #000000;
             padding: 5px 10px 5px 12px;
             width: 100%;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            word-wrap: break-word;
         }
 
         .outgoing_msg {
@@ -358,7 +360,7 @@
 
         </div>
         <form class="msger-inputarea mt-1">
-            <input type="text" class="msger-input" placeholder="Nhập gì thì nhập..." style="width:94%;height:30%" id="messageInput" onkeyup="keyUp(event)">
+            <input type="text" class="msger-input" placeholder="Nhập gì thì nhập..." style="width:94%;height:30%" id="messageInput">
             <button class="btn" id="btnSendMsg" style="float:right;margin-top  :-38px;">
                 <img src="~/images/send-mail.png" width="25" height="25" />
             </button>
@@ -372,12 +374,24 @@
                 tonesStyle: "radio",
                 events: {
                     keyup: function (editor, event) {
-                      
+                        var code = (event.keyCode ? event.keyCode : event.which);
+                        if (code == 13) {
+                            $("#btnSendMsg").click();
+                        }
                     },
                     keydown: function (editor, event) {
-                      
+                        var code = (event.keyCode ? event.keyCode : event.which);
+                        if (code == 13) {
+                       
+                            $("#btnSendMsg").click();
+                        
+                        }
+                    },
+                    emojibtn_click: function (button, event) {
+                        console.log('event:emojibtn.click, emoji=' + button.children().data("name"));
                     }
-                }
+                },
+                saveEmojisAs: 'image'
             });
 
 
