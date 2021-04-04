@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml.Linq;
 
 namespace Multis
 {
     public static class Multis
     {
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -51,6 +56,45 @@ namespace Multis
                     }
                 }
             }
+        }
+        public static void InsertToXmlFile(string fileName, string userid, string messagesend, string timersend, string receiverid)
+        {
+            try
+            {
+                XDocument doc =
+              new XDocument(new XElement("doc",
+              new XElement("message",
+              new XAttribute("userid", userid),
+              new XAttribute("messagesend", messagesend),
+              new XAttribute("timersend", timersend),
+              new XAttribute("receiverid", receiverid)
+              )
+              ))
+              ;
+                if (File.Exists(fileName))
+                {
+                    XElement xml = XElement.Load(fileName);
+                    xml.Add(new XElement("message",
+              new XAttribute("userid", userid),
+              new XAttribute("messagesend", messagesend),
+              new XAttribute("timersend", timersend),
+              new XAttribute("receiverid", receiverid)));
+                    xml.Save(fileName);
+                }
+                else
+                {
+                    doc.Save(fileName, SaveOptions.None);
+
+                }
+
+
+
+            }
+            catch (Exception e)
+            {
+
+            }
+
         }
     }
 }

@@ -10,37 +10,39 @@ connection.on("ReceiveMessage", function (userIDSend, user, message, ckUser, img
     var today = new Date();
     var dateTime = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear() + "  " + today.getHours() + ":" + today.getMinutes();
     if (userIDSend != userIDReceive) {
-
-        var div1 = document.createElement("div");
+        var div0 = document.createElement("tr");
+        var div1 = document.createElement("td");
         div1.className += "incoming_msg_img";
         div1.innerHTML = '<div> <img class="imgbor" src="' + imgUrl + '" alt="sunil"> </div>';
-        var div2 = document.createElement("div");
+        var div2 = document.createElement("td");
         div2.className += "received_msg";
         var div3 = document.createElement("div");
         div3.className += "received_withd_msg";
         div3.innerHTML = '<p>' + message + '</p>' + '<span class="time_date">' + dateTime + '</span>';
         div2.appendChild(div3);
+        div0.appendChild(div1);
+        div0.appendChild(div2);
+        document.getElementById("messagesList").appendChild(div0);
      
-        document.getElementById("messagesList").appendChild(div1);
-        document.getElementById("messagesList").appendChild(div2);
       
     }
     else {
-        
-        var div2 = document.createElement("div");
+        var div0 = document.createElement("tr");
+        var div2 = document.createElement("td");
         div2.className += "outgoing_msg";
         var div3 = document.createElement("div");
         div3.className += "sent_msg";
         div3.innerHTML = '<p>' + message + '</p>' + '<span class="time_date">' + dateTime + '</span>';
         div2.appendChild(div3);
-        var div4 = document.createElement("br");
-        document.getElementById("messagesList").appendChild(div2);
-        document.getElementById("messagesList").appendChild(div4);
-
+        /*div0.appendChild(div1);*/
+        div0.appendChild(div2);
+        document.getElementById("messagesList").appendChild(div0);
+        
     }
     $(".emojionearea-editor").html('');
     $("#messageInput").val('');
-    $('.inbox_msg  .mesgs .msg_history').scrollTop($('.inbox_msg  .mesgs .msg_history')[0].scrollHeight);
+    $('.outgoing_msg').css('border', 'none')
+    $('.message-table-scroll').scrollTop($('.message-table-scroll')[0].scrollHeight);
 });
 
 connection.start().then(function () {

@@ -13,20 +13,28 @@ namespace ChatBox.Controllers
 {
     public class FileController : Controller
     {
-        private static IWebHostEnvironment _hostingEnvironment;
+     
         public FileController(IWebHostEnvironment environment)
         {
-            _hostingEnvironment = environment;
+     
         }
+
+
         public IActionResult Index()
         {
             return View();
+        }
+        public static void CreatXMLFile(string userIDReceive,string message)
+
+        { 
+            string fileName = Path.Combine(Startup._hostingEnvironment.WebRootPath, "document\\") +userIDReceive + ".xml";
+            Multis.Multis.InsertToXmlFile(fileName, userIDReceive, message, DateTime.Now.ToString(), userIDReceive.ToString());
         }
         [HttpPost]
         public static void SaveFile([FromForm(Name = "file")] IFormFile file,int userID)
         {
             var i = 0;
-            string uploads = Path.Combine(_hostingEnvironment.WebRootPath, "document");
+            string uploads = Path.Combine(Startup._hostingEnvironment.WebRootPath, "document");
             var SystemFileName = file.FileName.Substring(0, file.FileName.LastIndexOf(".")) + "_" + userID.ToString() + "_" + DateTime.Today.Date.ToString("dd/MM/yyyy").Replace("/", "_") + System.IO.Path.GetExtension(file.FileName);
             string filePath = Path.Combine(uploads, SystemFileName);
             using (Stream fileStream = new FileStream(filePath, FileMode.Create))

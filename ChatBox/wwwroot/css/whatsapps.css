@@ -1,0 +1,165 @@
+body {
+    background-image: url("/images/background_w2.jpg");
+}
+
+.back-top{
+ background-color:  #009688;
+ height: 15vh;
+}
+
+table.outgoing_msg td {
+    font-size: 90%;
+}
+.back-main {
+    background-color: #D9DBD5;
+}
+
+.back-container{
+ position: relative;
+}
+
+.front-container{
+ position: absolute;
+ top:0;
+ left:0;
+ right: 0;
+}
+.front-container1{
+ position: absolute;
+ top:20px;
+ left:0;
+ right: 0;
+}
+
+.chat-top{
+ background-color: #EDEDED;
+ min-height: 50px;
+}
+
+.profile-image{
+ margin-top: 7px;
+ height: 30px;
+ width: 30px;
+}
+
+.contacts{
+ background-color: #ffffff;
+ min-height: 600px;
+}
+
+.contact-table-scroll{
+ overflow-y: scroll;
+ height: 600px;
+}
+
+.message-area{
+ background-color:  #e4e1de;
+ min-height: 600px;
+}
+
+.message-table-scroll {
+    overflow-y: scroll;
+    height: 550px;
+    background-image: url('/images/Lan.jpg');
+    background-size: 900px 550px;
+}
+
+.message-box{
+ background-color: #F0F0F0;
+}
+.msgreceive {
+    float:left
+}
+.msgsend {
+    float: right
+}
+.incoming_msg_img {
+    display: inline-block;
+    width: 4%;
+    border: none;
+}
+.received_msg {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+    border: none;
+}
+.received_withd_msg p {
+    background: #c3fcb8 none repeat scroll 0 0;
+    border-radius: 3px;
+    font-size: 19px;
+    margin: 0;
+    color: #000000;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    word-wrap: break-word;
+}
+.received_withd_msg {
+    width: 70%;
+    float: left;
+    height: 80px;
+    border: none;
+    /*margin-right:-60px;*/
+}
+.outgoing_msg {
+    border:none;
+    overflow: hidden;
+    margin: 0px 0 10px;
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 92%;
+   
+}
+.sent_msg p {
+    background: #faf0f0 none repeat scroll 0 0;
+    border-radius: 3px;
+    font-size: 19px;
+    margin: 0;
+    color: #000000;
+    padding: 5px 10px 5px 12px;
+    width: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    word-wrap: break-word;
+}
+.sent_msg {
+    float: right;
+    border: none;
+    width: 70%;
+    text-align: right;
+    max-width: 340px;
+    border: none;
+}
+.time_date {
+    color: #747474;
+    display: block;
+    font-size: 10px;
+    margin: 3px 0 0;
+}
+.imgbor {
+    border-radius: 50%;
+    margin-bottom: 4px;
+    border: none;
+}
+button{
+    border:none;
+    border-radius:50%;
+}
+.searchtext{
+    float:right;
+}
+button:focus {
+    outline: 0 !important;
+}
+button:active {
+    background: #e4e1de;
+    outline: none;
+    border: none;
+    /* border:dotted;*/
+}
+button.launch:hover {
+    cursor: pointer;
+    background-color: #FABD44;
+}

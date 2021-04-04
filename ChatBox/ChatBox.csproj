@@ -17,8 +17,8 @@
 
   <ItemGroup>
     <Folder Include="Views\Emoji\" />
-    <Folder Include="wwwroot\microsoft\" />
     <Folder Include="wwwroot\document\" />
+    <Folder Include="wwwroot\microsoft\" />
   </ItemGroup>
 
   <ItemGroup>

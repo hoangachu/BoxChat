@@ -13,13 +13,16 @@ namespace ChatBox
 {
     public class Startup
     {
-        public IConfiguration Configuration
-        { get; }
+        public IConfiguration Configuration { get; }
+        public static Microsoft.AspNetCore.Hosting.IHostingEnvironment _hostingEnvironment { get; set; }
+
+
         public static string connectionString = "";
          /*"Server=ADMIN;Database=ChatBot;Trusted_Connection=True;MultipleActiveResultSets=true"*/
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             Configuration = configuration;
+            _hostingEnvironment = env;
             connectionString = Configuration.GetConnectionString("DefaultConnection").ToString();
         }
    

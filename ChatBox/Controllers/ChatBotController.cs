@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 using ChatBox.Models.HistoryChat;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -76,6 +79,53 @@ namespace ChatBox.Controllers
                 }
             }
             return lstHistoryMessage;
+        }
+        [HttpPost]
+        public async void RegistMessage(int userid)
+        {
+            int UserID = 0;
+            int i = 0;
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(Path.Combine(Startup._hostingEnvironment.WebRootPath, "document\\") + userid + ".xml");
+                XmlNodeList elemList = doc.GetElementsByTagName("message");
+                for ( i = 0; i < elemList.Count; i++)
+                {
+                    string useridv = elemList[i].Attributes["userid"].Value;
+                }
+                //XDocument xml = XDocument.Load();
+
+                //foreach (var node in xml.Descendants())
+                //{
+                //    if (node is XElement)
+                //    {
+                      
+                //        //some code...
+                //    }
+                //}
+                using (SqlConnection con = new SqlConnection(Startup.connectionString))
+                {
+                    //using (SqlCommand cmd = new SqlCommand("Add_User", con))
+                    //{
+                    //    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    //    cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = UserName;
+                    //    cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = Multis.Multis.Encrypt(Password);
+                    //    cmd.Parameters.Add("@UserID", SqlDbType.Int).Direction = ParameterDirection.Output;
+                    //    con.Open();
+                    //    i = cmd.ExecuteNonQuery();
+                    //    UserID = Convert.ToInt32(cmd.Parameters["@UserID"].Value);
+                    //    FileController.SaveFile(file, UserID);
+                    //}
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            //return Ok(new { data = i, userID = UserID, url = "Home" });
         }
     }
 }
