@@ -23,8 +23,8 @@ connection.on("ReceiveMessage", function (userIDSend, user, message, ckUser, img
         div0.appendChild(div1);
         div0.appendChild(div2);
         document.getElementById("messagesList").appendChild(div0);
-     
-      
+
+
     }
     else {
         var div0 = document.createElement("tr");
@@ -37,9 +37,17 @@ connection.on("ReceiveMessage", function (userIDSend, user, message, ckUser, img
         /*div0.appendChild(div1);*/
         div0.appendChild(div2);
         document.getElementById("messagesList").appendChild(div0);
-        
+
     }
     $(".emojionearea-editor").html('');
+    var innerhtmlmsg = document.getElementById("containhistory").innerHTML;
+    $.ajax({
+        url: "CreatXMLFile",
+        data: { userid: $('#userID').val(), message: innerhtmlmsg},
+        type: 'POST',
+        sync: true
+        
+    });
     $("#messageInput").val('');
     $('.outgoing_msg').css('border', 'none')
     $('.message-table-scroll').scrollTop($('.message-table-scroll')[0].scrollHeight);

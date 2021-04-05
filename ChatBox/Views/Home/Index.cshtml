@@ -1,15 +1,18 @@
-﻿
-<!doctype html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="~/css/stylelogin.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <script src="~/js/Home/home.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="~/css/Login/login.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="~/css/style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -17,52 +20,99 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
-
-
 </head>
 <body>
-    <section class="ftco-section">
-        <div class="container">
 
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-4">
-                    <div class="login-wrap py-5">
-                        <div class="img d-flex align-items-center justify-content-center" style="background-image: url(images/bg.jpg);"></div>
-                        <h3 class="text-center mb-0">Welcome</h3>
-                        <p class="text-center">Sign in by entering the information below</p>
-                        <form action="#" class="login-form">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Username or email" id="Username" required>
-                            </div>
-                            <div class="form-group">
-                                <input id="Password" type="password" class="form-control" name="password" placeholder="Password">
-                                <span toggle="#Password" class="fa fa-fw fa-eye field-icon toggle-password showhidepas"></span>
-                            </div>
-                            <div class="form-group d-md-flex">
-                                <div class="w-100 text-md-right">
-                                    <a href="#">Forgot Password</a>
+    <div id="container">
+        <div id="login">
+            <a href="Home/login" class="button-login">Login</a>
+        </div>
+        <div id="signup">
+            <a href="Home/signup" class="button-signup">Sign Up</a>
+        </div>
+        <h1>Login</h1>
+        <div id="form-box">
+            <form action="#">
+                <label for="email">Email or Phone</label><br>
+                <input type="text" class="fields" name="email" placeholder="...." required=""><br><br>
+                <label for="pass">Password</label><br>
+                <input type="password" class="fields" name="pass" placeholder="...." required="">
+                <a class="forgot-password" href="#">Forgot Password?</a><br><br><br>
+                <input type="submit" class="button" value="Login" id="btnlogin">
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>
+@*<!doctype html>
+    <html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="~/css/Login/login.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="~/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
+        <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
+
+
+    </head>
+    <body>
+        <section class="ftco-section">
+            <div class="container">
+
+                <div class="row justify-content-center" id="containformlogin">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="login-wrap py-5">
+                            <div class="img d-flex align-items-center justify-content-center" style="background-image: url(images/bg.jpg);"></div>
+                            <h3 class="text-center mb-0">Welcome</h3>
+                            <p class="text-center">Sign in by entering the information below</p>
+                            <form action="#" class="login-form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Username or email" id="Username" required>
                                 </div>
+                                <div class="form-group">
+                                    <input id="Password" type="password" class="form-control" name="password" placeholder="Password">
+                                    <span toggle="#Password" class="fa fa-fw fa-eye field-icon toggle-password showhidepas"></span>
+                                </div>
+                                <div class="form-group d-md-flex">
+                                    <div class="w-100 text-md-right">
+                                        <a href="#">Forgot Password</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn form-control btn-primary rounded submit px-3" id="btnlogin">Login</button>
+                                </div>
+                            </form>
+                            <div class="w-100 text-center mt-4 text">
+                                <p class="mb-0">Don't have an account? Or</p><p> <a href="~/" id="loginQR">Đăng nhập bằng mã QR code</a></p>
+                                <a href="~/User">Sign Up</a>
                             </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn form-control btn-primary rounded submit px-3" id="btnlogin">Login</button>
-                            </div>
-                        </form>
-                        <div class="w-100 text-center mt-4 text">
-                            <p class="mb-0">Don't have an account?</p>
-                            <a href="~/User">Sign Up</a>
                         </div>
                     </div>
                 </div>
+                <div class="row justify-content-center" style="display:none" id="containqrcode" >
+                    <img src="@ViewBag.QRCodeImage" alt="" style="height:300px;width:300px;">
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <script src="~/js/jquery.min.js"></script>
-    <script src="~/js/popper.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
-    <script src="~/js/main.js"></script>
-    <script src="~/js/Home/home.js"></script>
-</body>
-</html>
+        <script src="~/js/jquery.min.js"></script>
+        <script src="~/js/popper.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
+        <script src="~/js/main.js"></script>
+        <script src="~/js/Home/home.js"></script>
+    </body>
+    </html>*@
 
 

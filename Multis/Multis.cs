@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Multis
@@ -61,28 +62,39 @@ namespace Multis
         {
             try
             {
-                XDocument doc =
-              new XDocument(new XElement("doc",
-              new XElement("message",
-              new XAttribute("userid", userid),
-              new XAttribute("messagesend", messagesend),
-              new XAttribute("timersend", timersend),
-              new XAttribute("receiverid", receiverid)
-              )
-              ))
-              ;
+
+
                 if (File.Exists(fileName))
                 {
-                    XElement xml = XElement.Load(fileName);
-                    xml.Add(new XElement("message",
-              new XAttribute("userid", userid),
-              new XAttribute("messagesend", messagesend),
-              new XAttribute("timersend", timersend),
-              new XAttribute("receiverid", receiverid)));
-                    xml.Save(fileName);
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(fileName);
+                        if (doc.SelectSingleNode("root") == null)
+                        {
+                        XElement xml_pre = XElement.Load(fileName);
+                        xml_pre.Add(new XElement("message"));
+                        xml_pre.Save(fileName);
+                        }
+                        XElement xml = XElement.Load(fileName);
+                        xml.Add(new XElement("doc",
+                        new XElement("message",
+                        new XAttribute("userid", userid),
+                        new XAttribute("messagesend", messagesend),
+                        new XAttribute("timersend", timersend),
+                        new XAttribute("receiverid", receiverid))));
+                        xml.Save(fileName);
                 }
                 else
                 {
+                    XDocument doc =
+                    new XDocument(new XElement("root",
+                    new XElement("doc",
+                    new XElement("message",
+                    new XAttribute("userid", userid),
+                    new XAttribute("messagesend", messagesend),
+                    new XAttribute("timersend", timersend),
+                    new XAttribute("receiverid", receiverid)
+                    )
+                )));
                     doc.Save(fileName, SaveOptions.None);
 
                 }

@@ -10,7 +10,8 @@ namespace ChatBox.Models.HistoryChat
         public int UserID { get; set; }
         public int ReceiverID { get; set; }
         public List<HistoryMessage> ListHistoryMessage { get; set; }
-      
+        public string MessageSendText { get; set; }
+
     }
     public class HistoryMessage
     {

@@ -14,12 +14,9 @@ namespace ChatBox.Hubs
         const int CheckUser = 2;
         public async Task SendMessage(string userIDReceive, string username, string message,string imgURL)
         {
-            FileController.CreatXMLFile(userIDReceive,message);
-
-
             if (!string.IsNullOrEmpty(message))
             {
-             
+                //FileController.CreatXMLFile(userIDReceive, message);
                 await Clients.All.SendAsync("ReceiveMessage", userIDReceive, username, message, CheckUser, imgURL);
             }
 

@@ -1,0 +1,112 @@
+﻿
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/css/stylelogin.css" rel="stylesheet" />
+    <script src="~/js/Home/home.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/css/Login/login.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/styles/metro/notify-metro.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" />
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
+</head>
+<body>
+
+    <div id="container">
+        <div id="login">
+            <a href="~/Home/login" class="button-login">Login</a>
+        </div>
+        <div id="signup">
+            <a href="~/Home/signup" class="button-signup">Sign Up</a>
+        </div>
+        <h1>Login</h1>
+        <div id="form-box">
+            <form action="#" id="formlogin">
+                <label for="email">Email or Phone</label><br>
+                <input type="text" class="fields" name="email" placeholder="...." required="" id="Username"><br><br>
+                <label for="pass">Password</label><br>
+                <input type="password" class="fields" name="pass" placeholder="...." required="" id="Password">
+                <a class="forgot-password" href="#">Forgot Password?</a><br><br><br>
+                <img src="@ViewBag.QRCodeImage" alt=""  id="imgQR" class="imgqr">
+                <input type="submit" class="button" value="Login" id="btnlogin"><br>
+                <input  class="button" value="Login with QRCode" id="btnloginwithQRCode">
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>
+<script>
+
+    $(document).ready(function () {
+        const ACCEPT_LOGIN = 1;
+        $(document).ready(function () {
+
+
+            $("#loginQR").click(function () {
+
+                $("#containformlogin").css('display', 'none');
+                $("#containqrcode").css('display', 'block');
+
+
+            });
+            $(".toggle-password").click(function () {
+
+                $(this).toggleClass("fa-eye fa-eye-slash");
+                var input = $($(this).attr("toggle"));
+                if (input.attr("type") == "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });
+        });
+
+        $("#btnlogin").click(function () {
+
+            var Username = $("#Username").val();
+            var Password = $("#Password").val();
+
+
+            $.ajax({
+
+                url: "Login",
+                type: 'POST',
+                data: { Username: Username, Password: Password },
+                cache: false,
+                success: function (result) {
+
+                    if (result.value.data == ACCEPT_LOGIN) {
+
+                        window.open(result.value.url, '_self')
+                    }
+                    else {
+                        toastr.error('Username or Password not correct.Try against!');
+                    }
+                }
+
+
+            });
+
+        });
+        $('#btnloginwithQRCode').click(function () {
+            $('#formlogin').find('input').css('display', 'none');
+            $('#formlogin').find('label').css('display', 'none');
+            $('#formlogin').find(' a').css('display', 'none'); 
+            $('#imgQR').css('display', 'block');
+
+        })
+
+    });
+</script>

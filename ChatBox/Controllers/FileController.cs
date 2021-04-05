@@ -24,12 +24,7 @@ namespace ChatBox.Controllers
         {
             return View();
         }
-        public static void CreatXMLFile(string userIDReceive,string message)
-
-        { 
-            string fileName = Path.Combine(Startup._hostingEnvironment.WebRootPath, "document\\") +userIDReceive + ".xml";
-            Multis.Multis.InsertToXmlFile(fileName, userIDReceive, message, DateTime.Now.ToString(), userIDReceive.ToString());
-        }
+      
         [HttpPost]
         public static void SaveFile([FromForm(Name = "file")] IFormFile file,int userID)
         {

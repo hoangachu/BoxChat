@@ -2,9 +2,9 @@ body {
     background-image: url("/images/background_w2.jpg");
 }
 
-.back-top{
- background-color:  #009688;
- height: 15vh;
+.back-top {
+    background-color: hotpink;
+    height: 5vh;
 }
 
 table.outgoing_msg td {
@@ -133,7 +133,7 @@ table.outgoing_msg td {
     border: none;
 }
 .time_date {
-    color: #747474;
+    color: deeppink;
     display: block;
     font-size: 10px;
     margin: 3px 0 0;

@@ -10,6 +10,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.IO;
+using QRCoder;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace ChatBox.Controllers
 {
@@ -24,10 +28,31 @@ namespace ChatBox.Controllers
 
         public IActionResult Index()
         {
-            return View();
+          
+                return View();
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        public IActionResult Login()
+        {
+            string qrcode = "anhyeuem";
+            using (MemoryStream ms = new MemoryStream())
+            {
+                QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();
+                QRCodeData qRCodeData = qRCodeGenerator.CreateQrCode(qrcode, QRCodeGenerator.ECCLevel.Q);
+                QRCode qRCode = new QRCode(qRCodeData);
+                using (Bitmap bitmap = qRCode.GetGraphic(20))
+                {
+                    bitmap.Save(ms, ImageFormat.Png);
+                    ViewBag.QRCodeImage = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+                }
+            }
+            return View();
+        }
+        public IActionResult Signup()
         {
             return View();
         }

@@ -1,6 +1,6 @@
-﻿<!doctype html>
+﻿@model ChatBox.Models.HistoryChat.ChatHistory
+<!doctype html>
 <html lang="en">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -28,6 +28,7 @@
     <input style="display:none" value="@ViewBag.imgURL" id="imgURL">
     <input style="display:none" value="@ViewBag.UserID" id="userID">
     <input style="display:none" value="@ViewBag.UserName" id="userName">
+    <input style="display:none" value="@ViewBag.tmptable" id="tmptable">
     <div class="back-container">
         <div class="container-fluid front-container">
             <div class="back-top"></div>
@@ -96,46 +97,7 @@
 
                 </div>
                 <div class="col-sm-8 message-area" id="containmsg">
-                    <div class="message-table-scroll">
-                        <table class="table">
-                            <tbody id="messagesList">
-
-                                @foreach (var item in Model.ListHistoryMessage)
-                                {
-                                    if (item.ChkUser == 1)
-                                    {
-                                        <tr>
-
-                                            <td class="incoming_msg_img"> <img src="@item.ImagesUrl" alt="sunil" class="imgbor"> </td>
-                                            <td class="received_msg">
-                                                <div class="received_withd_msg">
-                                                    <p>@item.MessageSendText</p>
-                                                    <span class="time_date">@item.SendTimer</span>
-                                                </div>
-                                            </td>
-
-                                        </tr>
-                                    }
-                                    else
-                                    {
-                                        <tr>
-
-
-                                            <td class="outgoing_msg">
-                                                <div class="sent_msg">
-                                                    <p>@item.MessageSendText</p>
-                                                    <span class="time_date">@item.SendTimer</span>
-                                                </div>
-                                            </td>
-
-                                        </tr>
-                                    }
-
-                                    <!-- start -->
-                                    <!-- end -->
-                                }
-                            </tbody>
-                        </table>
+                    <div class="message-table-scroll" id="containhistory">
                     </div>
                     <div class="row message-box p-3">
                         <div class="col-sm-3 mt-2">
@@ -173,6 +135,7 @@
                         </div>
 
                     </div>
+
                 </div>
                 <div class="col-sm-3 contacts searchtext" id="divsearchtext" style="display: none;">
                     <div class="contact-table-scroll">
@@ -200,7 +163,11 @@
             crossorigin="anonymous"></script>
 
     <script>
+
         $(document).ready(function () {
+
+            document.getElementById("containhistory").innerHTML = $("#tmptable").val();
+            $('.message-table-scroll').scrollTop($('.message-table-scroll')[0].scrollHeight);
             /*  $('#divsearchtext').removeClass('col-sm-3');*/
             $("#messageInput").emojioneArea({
                 pickerPosition: "top",
