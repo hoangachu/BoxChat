@@ -75,10 +75,5 @@ document.getElementById("btnSendMsg").addEventListener("click", function (event)
     event.preventDefault();
 });
 
-function scrollToLatestChatMessage(chatContainer) {
-    console.log("Entry::scrollToLatestChatMessage in chat.js " + chatContainer);
-    $(".msg_container_base").animate({
-        scrollTop: $('.msg_container_base').prop("scrollHeight")
-    }, 1000);
-    console.log("Entry::scrollToLatestChatMessage in chat.js ");
-}
+
+

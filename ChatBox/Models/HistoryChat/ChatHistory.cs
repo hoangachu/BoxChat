@@ -29,5 +29,6 @@ namespace ChatBox.Models.HistoryChat
         public int FriendId { get; set; }
         public string ImageURL { get; set; }
         public string FriendName { get; set; }
+        public int Status { get; set; }
     }
 }

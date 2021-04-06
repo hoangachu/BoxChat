@@ -95,6 +95,7 @@ namespace ChatBox.Controllers
                                 Friend Friend = new Friend();
                                 Friend.UserID = (Int32)dr["UserID"];
                                 Friend.FriendId = (Int32)dr["FriendID"];
+                                Friend.Status = (Int32)dr["Status"];
                                 //Friend.MessageSendText = (string)dr["MessageSendText"];
                                 //var sendtimer = (DateTime)dr["SendTimer"];
                                 //Friend.SendTimer = sendtimer == null ? DateTime.Now.ToString("{0:MM/dd/yyyy}") : sendtimer.ToString("{0:MM/dd/yyyy}");

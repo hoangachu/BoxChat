@@ -21,5 +21,13 @@ namespace ChatBox.Hubs
             }
 
         }
+        public async Task TestConnect(string userID)
+        {
+           
+                //FileController.CreatXMLFile(userIDReceive, message);
+                await Clients.All.SendAsync("CheckStatus", userID);
+            
+
+        }
     }
 }

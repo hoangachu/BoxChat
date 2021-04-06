@@ -37,9 +37,10 @@
                 <label for="pass">Password</label><br>
                 <input type="password" class="fields" name="pass" placeholder="...." required="" id="Password">
                 <a class="forgot-password" href="#">Forgot Password?</a><br><br><br>
-                <img src="@ViewBag.QRCodeImage" alt=""  id="imgQR" class="imgqr">
+                <img src="@ViewBag.QRCodeImage" alt="" id="imgQR" class="imgqr">
                 <input type="submit" class="button" value="Login" id="btnlogin"><br>
-                <input  class="button" value="Login with QRCode" id="btnloginwithQRCode">
+                <input class="button" value="Login with QRCode" id="btnloginwithQRCode">
+              
             </form>
         </div>
 
@@ -47,9 +48,12 @@
 
 </body>
 </html>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/Testconnection.js"></script>
 <script>
 
     $(document).ready(function () {
+      
         const ACCEPT_LOGIN = 1;
         $(document).ready(function () {
 
@@ -103,7 +107,7 @@
         $('#btnloginwithQRCode').click(function () {
             $('#formlogin').find('input').css('display', 'none');
             $('#formlogin').find('label').css('display', 'none');
-            $('#formlogin').find(' a').css('display', 'none'); 
+            $('#formlogin').find(' a').css('display', 'none');
             $('#imgQR').css('display', 'block');
 
         })

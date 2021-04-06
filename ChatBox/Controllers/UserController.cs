@@ -1,4 +1,5 @@
-﻿using ChatBox.Models.User;
+﻿using ChatBox.Models.HistoryChat;
+using ChatBox.Models.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -7,12 +8,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChatBox.Controllers
 {
     public class UserController : Controller
     {
+        ChatBotController chatBotController = new ChatBotController();
         public IActionResult Index()
         {
             return View();
@@ -31,7 +34,7 @@ namespace ChatBox.Controllers
                             cmd.CommandType = CommandType.StoredProcedure;
                             con.Open();
                             cmd.Parameters.Add("@UserID", SqlDbType.VarChar).Value = UserID;
-                            
+
                             SqlDataReader dr = cmd.ExecuteReader();
                             while (dr.Read())
                             {
@@ -41,9 +44,9 @@ namespace ChatBox.Controllers
                                 User.imgURL = (string)dr["ImagesUrl"];
                             }
 
-                           
-                                
-                            
+
+
+
                         }
                         catch (Exception e)
                         {
@@ -81,7 +84,7 @@ namespace ChatBox.Controllers
                                 User.UserID = (int)dr["UserID"];
                                 User.imgURL = (string)dr["FileURL"];
                             }
-                          
+
 
 
                         }
@@ -115,7 +118,7 @@ namespace ChatBox.Controllers
                         cmd.Parameters.Add("@Password", SqlDbType.VarChar).Value = Multis.Multis.Encrypt(Password);
                         cmd.Parameters.Add("@UserID", SqlDbType.Int).Direction = ParameterDirection.Output;
                         con.Open();
-                         i = cmd.ExecuteNonQuery();
+                        i = cmd.ExecuteNonQuery();
                         UserID = Convert.ToInt32(cmd.Parameters["@UserID"].Value);
                         FileController.SaveFile(file, UserID);
                     }
@@ -126,7 +129,39 @@ namespace ChatBox.Controllers
             {
                 throw ex;
             }
-            return Ok(new { data = i, userID = UserID,url= "Home" });
+            return Ok(new { data = i, userID = UserID, url = "Home" });
+        }
+        [HttpPost]
+        public void CheckStatus(int userID)
+        {
+            List<Friend> lstFriend = chatBotController.GetListFriend(userID);
+            Update(lstFriend,Multis.TypeUpdateStatus.UPDATE_MIDDLECALL.GetHashCode(),userID);
+            Thread.Sleep(2500);
+            Update(lstFriend, Multis.TypeUpdateStatus.UPDATE_NOTWORKING.GetHashCode(),userID);
+        }
+
+        [HttpPost]
+        public void Update(List<Friend> lstFriend,int typeUpdate,int userID)
+        {
+            using (SqlConnection con = new SqlConnection(Startup.connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("Update_FriendStatus", con))
+                {
+                    var table = new DataTable();
+                    table.Columns.Add("Item", typeof(string));
+                    lstFriend.ForEach(x => table.Rows.Add(x));
+                    var pList = new SqlParameter("@list", SqlDbType.Structured);
+                    pList.TypeName = "dbo.listID";
+                    pList.Value = table;
+                    cmd.Parameters.Add(pList);
+                    cmd.Parameters.AddWithValue(@"typeUpdate", typeUpdate);
+                    cmd.Parameters.AddWithValue(@"userID", userID);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+
         }
     }
 }
