@@ -1,21 +1,22 @@
 ﻿
 $(document).ready(function () {
 
-    //setInterval(function () {
-    //    setTimeout(function () {
+    window.addEventListener('load', function () {
+        var status = document.getElementById("status");
+        var log = document.getElementById("log");
 
-    //        $.ajax({
-    //            url: "RegistMessage",
-    //            data: { userid: $('#userID').val() },
-    //            type: 'POST'
+        function updateOnlineStatus(event) {
+            var condition = navigator.onLine ? "online" : "offline";
 
-    //        });
+            status.className = condition;
+            status.innerHTML = condition.toUpperCase();
 
+            log.insertAdjacentHTML("beforeend", "Event: " + event.type + "; Status: " + condition);
+        }
 
-    //    }, 200);
-       
-      
-    //}, 800);
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+    });
 });
 
 

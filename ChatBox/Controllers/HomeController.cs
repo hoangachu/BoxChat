@@ -38,7 +38,7 @@ namespace ChatBox.Controllers
         }
         public IActionResult Login()
         {
-            string qrcode = "anhyeuem";
+            string qrcode = "Lan Bò Bề";
             using (MemoryStream ms = new MemoryStream())
             {
                 QRCodeGenerator qRCodeGenerator = new QRCodeGenerator();

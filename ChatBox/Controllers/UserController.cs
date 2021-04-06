@@ -38,7 +38,7 @@ namespace ChatBox.Controllers
                                 User.UserName = (string)dr["UserName"];
                                 User.Password = (string)dr["Password"];
                                 User.UserID = (int)dr["UserID"];
-                                User.imgURL = (string)dr["FileURL"];
+                                User.imgURL = (string)dr["ImagesUrl"];
                             }
 
                            

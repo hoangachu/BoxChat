@@ -10,16 +10,17 @@ connection.on("ReceiveMessage", function (userIDSend, user, message, ckUser, img
     var today = new Date();
     var dateTime = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear() + "  " + today.getHours() + ":" + today.getMinutes();
     if (userIDSend != userIDReceive) {
-        var div0 = document.createElement("tr");
-        var div1 = document.createElement("td");
-        div1.className += "incoming_msg_img";
-        div1.innerHTML = '<div> <img class="imgbor" src="' + imgUrl + '" alt="sunil"> </div>';
-        var div2 = document.createElement("td");
-        div2.className += "received_msg";
-        var div3 = document.createElement("div");
-        div3.className += "received_withd_msg";
-        div3.innerHTML = '<p>' + message + '</p>' + '<span class="time_date">' + dateTime + '</span>';
-        div2.appendChild(div3);
+        var div0 = document.createElement("div");
+
+        div0.className += "d-flex justify-content-start mb-4 ml-2 mt-3";
+        var div1 = document.createElement("div");
+        div1.className += "img_cont_msg";
+        div1.innerHTML = '<img src = "' + imgUrl + '" class=" rounded-circle user_img_msg">';
+
+        var div2 = document.createElement("div");
+        div2.className += "msg_cotainer";
+
+        div2.innerHTML = message + '<span class="msg_time">' + dateTime + '</span>';
         div0.appendChild(div1);
         div0.appendChild(div2);
         document.getElementById("messagesList").appendChild(div0);
@@ -27,27 +28,31 @@ connection.on("ReceiveMessage", function (userIDSend, user, message, ckUser, img
 
     }
     else {
-        var div0 = document.createElement("tr");
-        var div2 = document.createElement("td");
-        div2.className += "outgoing_msg";
-        var div3 = document.createElement("div");
-        div3.className += "sent_msg";
-        div3.innerHTML = '<p>' + message + '</p>' + '<span class="time_date">' + dateTime + '</span>';
-        div2.appendChild(div3);
-        /*div0.appendChild(div1);*/
+        var div0 = document.createElement("div");
+
+        div0.className += "d-flex justify-content-end mb-4 mr-2 mt-3";
+        var div1 = document.createElement("div");
+        div1.className += "msg_cotainer_send";
+        div1.innerHTML = message + '<span class="msg_time_send">' + dateTime + '</span>'
+
+        var div2 = document.createElement("div");
+        div2.className += "img_cont_msg";
+
+        div2.innerHTML = ' <img src = "' + imgUrl + '" class=" rounded-circle user_img_msg"> ';
+        div0.appendChild(div1);
         div0.appendChild(div2);
         document.getElementById("messagesList").appendChild(div0);
 
     }
-    $(".emojionearea-editor").html('');
-    var innerhtmlmsg = document.getElementById("containhistory").innerHTML;
+    var innerhtmlmsg = document.getElementById("messagesList").innerHTML;
     $.ajax({
         url: "CreatXMLFile",
-        data: { userid: $('#userID').val(), message: innerhtmlmsg},
+        data: { userid: $('#userID').val(), message: innerhtmlmsg },
         type: 'POST',
         sync: true
-        
+
     });
+    $(".emojionearea-editor").html('');
     $("#messageInput").val('');
     $('.outgoing_msg').css('border', 'none')
     $('.message-table-scroll').scrollTop($('.message-table-scroll')[0].scrollHeight);

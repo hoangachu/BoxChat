@@ -37,7 +37,8 @@
         <div class="container front-container1">
             <div class="row chat-top">
                 <div class="col-sm-4 border-right border-secondary">
-                    <img src="images/p3.jpg" alt="" class="profile-image rounded-circle">
+                    <img src="@Model.ImagesUrlUser" alt="" class="profile-image rounded-circle">
+                    <span class="dot"></span>
                     <span class="float-right mt-2">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
@@ -55,11 +56,12 @@
                         </svg>
                     </span>
 
-
+               
                 </div>
                 <div class="col-sm-8">
-                    <img src="images/p2.jpg" alt="" class="profile-image rounded-circle">
-                    <span class="ml-2">Rahul Kumar</span>
+                    <img src="@Model.ImagesUrlReceiver" alt="" class="profile-image rounded-circle">
+                    <span class="dot"></span>
+                    <span class="ml-2">@Model.ReceiverName</span>
                     <span class="float-right mt-2">
                         <button id="btnSearchOnMeg">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor"
@@ -86,18 +88,23 @@
                     <div class="contact-table-scroll">
                         <table class="table table-hover">
                             <tbody>
-                                <tr>
-                                    <td><img src="images/p2.jpg" alt="" class="profile-image rounded-circle"></td>
-                                    <td>Rahul Kumar <br> <small>achi chal rahi</small></td>
-                                    <td><small>11:55 PM</small></td>
-                                </tr>
+                                @foreach (var item in Model.LstFriend)
+                                {
+                                    <tr>
+                                        <td><img src="@item.ImageURL" alt="" class="profile-image rounded-circle"><span class="dot-2"></span></td>
+                                        <td>@item.FriendName <br> <small>achi chal rahi</small></td>
+                                        <td><small>11:55 PM</small></td>
+                                    </tr>
+                                }
+
                             </tbody>
                         </table>
                     </div>
 
                 </div>
                 <div class="col-sm-8 message-area" id="containmsg">
-                    <div class="message-table-scroll" id="containhistory">
+                    <div class="message-table-scroll" id="messagesList">
+                     
                     </div>
                     <div class="row message-box p-3">
                         <div class="col-sm-3 mt-2">
@@ -135,14 +142,14 @@
                         </div>
 
                     </div>
-
                 </div>
+
                 <div class="col-sm-3 contacts searchtext" id="divsearchtext" style="display: none;">
                     <div class="contact-table-scroll">
                         <table class="table table-hover">
                             <tbody>
                                 <tr>
-                                    <td><img src="images/p2.jpg" alt="" class="profile-image rounded-circle"></td>
+                                    <td><img src="images/p2.jpg" alt="" class="profile-image rounded-circle">  <span class="dot"></span></td>
                                     <td>Rahul Kumar <br> <small>achi chal rahi</small></td>
                                     <td><small>11:55 PM</small></td>
                                 </tr>
@@ -165,8 +172,7 @@
     <script>
 
         $(document).ready(function () {
-
-            document.getElementById("containhistory").innerHTML = $("#tmptable").val();
+            document.getElementById("messagesList").innerHTML = $('#tmptable').val();
             $('.message-table-scroll').scrollTop($('.message-table-scroll')[0].scrollHeight);
             /*  $('#divsearchtext').removeClass('col-sm-3');*/
             $("#messageInput").emojioneArea({

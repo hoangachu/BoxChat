@@ -27,24 +27,7 @@ namespace ChatBox.Controllers
             var User = _UserController.GetUserByUserID(UserID);
             ChatHistory.UserID = UserID;
             ChatHistory.ReceiverID = ReceiverID;
-            ChatHistory.ListHistoryMessage = GetHistoryMessagesUser(UserID, ReceiverID);
-            ViewBag.imgURL = User.imgURL;
-            ViewBag.UserID = User.UserID;
-            ViewBag.UserName = User.UserName;
-            ViewBag.tmptable = ChatHistory.ListHistoryMessage.FirstOrDefault().MessageSendText;
-            return View(ChatHistory);
-
-        }
-        [HttpGet]
-        public IActionResult Emoji()
-        {
-
-            return View();
-
-        }
-        public List<HistoryMessage> GetHistoryMessagesUser(int SenderID, int ReceiverID)
-        {
-            List<HistoryMessage> lstHistoryMessage = new List<HistoryMessage>();
+            ChatHistory.ImagesUrlUser = User.imgURL;
             using (SqlConnection con = new SqlConnection(Startup.connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand("GetList_Message", con))
@@ -59,14 +42,19 @@ namespace ChatBox.Controllers
                             SqlDataReader dr = cmd.ExecuteReader();
                             while (dr.Read())
                             {
-                                HistoryMessage historyMessage = new HistoryMessage();
-                                historyMessage.UserID = (Int32)dr["UserID"];
-                                historyMessage.MessageSendText = (string)dr["MessageSendText"];
-                                var sendtimer = (DateTime)dr["SendTimer"];
-                                historyMessage.SendTimer = sendtimer == null ? DateTime.Now.ToString("{0:MM/dd/yyyy}") : sendtimer.ToString("{0:MM/dd/yyyy}");
-                                historyMessage.ImagesUrl = (string)dr["ImagesUrl"];
-                                lstHistoryMessage.Add(historyMessage);
+                                ChatHistory.UserID = (Int32)dr["UserID"]; 
+                                ChatHistory.ReceiverID = (Int32)dr["ReceiverID"];
+                                ChatHistory.MessageSendText = (string)dr["MessageSendText"];
+                                //var sendtimer = (DateTime)dr["SendTimer"];
+                                //ChatHistory.SendTimer = sendtimer == null ? DateTime.Now.ToString("{0:MM/dd/yyyy}") : sendtimer.ToString("{0:MM/dd/yyyy}");
+                                //ChatHistory.ImagesUrlUser = (string)dr["ImagesUrlUser"];
+                                ChatHistory.ImagesUrlReceiver = (string)dr["ImagesUrlReceiver"];
+                                ChatHistory.UserName = (string)dr["UserName"];
+                                ChatHistory.ReceiverName = (string)dr["ReceiverName"];
+                                break;
                             }
+                            dr.Close();
+                            //ChatHistory.Add(historyMessage);
                         }
                         catch (Exception e)
                         {
@@ -79,9 +67,69 @@ namespace ChatBox.Controllers
 
                 }
             }
-            return lstHistoryMessage;
+            ViewBag.imgURL = User.imgURL;
+            ViewBag.UserID = User.UserID;
+            ViewBag.UserName = User.UserName;
+            ViewBag.tmptable = ChatHistory.MessageSendText;
+            ChatHistory.LstFriend = GetListFriend(UserID);
+            return View(ChatHistory);
+
         }
-    
+        [HttpGet]
+        public List<Friend> GetListFriend(int UserId)
+        {
+            List<Friend> lstFriend = new List<Friend>();
+            using (SqlConnection con = new SqlConnection(Startup.connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("GetList_Friend", con))
+                {
+                    {
+                        try
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            con.Open();
+                            cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = UserId;
+                            SqlDataReader dr = cmd.ExecuteReader();
+                            while (dr.Read())
+                            {
+                                Friend Friend = new Friend();
+                                Friend.UserID = (Int32)dr["UserID"];
+                                Friend.FriendId = (Int32)dr["FriendID"];
+                                //Friend.MessageSendText = (string)dr["MessageSendText"];
+                                //var sendtimer = (DateTime)dr["SendTimer"];
+                                //Friend.SendTimer = sendtimer == null ? DateTime.Now.ToString("{0:MM/dd/yyyy}") : sendtimer.ToString("{0:MM/dd/yyyy}");
+                                Friend.ImageURL = (string)dr["ImageURL"];
+                                Friend.FriendName = (string)dr["FriendName"];
+                                //ChatHistory.ImagesUrlReceiver = (string)dr["ImagesUrlReceiver"];
+                                //ChatHistory.UserName = (string)dr["UserName"];
+                                //ChatHistory.ReceiverName = (string)dr["ReceiverName"];
+                                lstFriend.Add(Friend);
+                            }
+                            dr.Close();
+                            //ChatHistory.Add(historyMessage);
+                        }
+                        catch (Exception e)
+                        {
+                            throw e;
+                        }
+
+                        con.Close();
+                    }
+
+
+                }
+            }
+
+            return lstFriend;
+
+        }
+        //public List<HistoryMessage> GetHistoryMessagesUser(int SenderID, int ReceiverID)
+        //{
+        //    List<HistoryMessage> lstHistoryMessage = new List<HistoryMessage>();
+
+        //    return lstHistoryMessage;
+        //}
+
         [HttpPost]
         public void CreatXMLFile(string userIDReceive, string message)
 
@@ -103,5 +151,5 @@ namespace ChatBox.Controllers
             }
         }
     }
-   
+
 }

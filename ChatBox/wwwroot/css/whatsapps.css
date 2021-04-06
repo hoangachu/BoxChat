@@ -1,5 +1,10 @@
 body {
-    background-image: url("/images/background_w2.jpg");
+    background-image: url("/images/background_w8.jpg");
+    background-repeat: no-repeat;
+    /*background-position: center;*/
+    /*  background-size: cover;*/
+    width: 100%;
+    height: 100%;
 }
 
 .back-top {
@@ -36,10 +41,12 @@ table.outgoing_msg td {
  min-height: 50px;
 }
 
-.profile-image{
- margin-top: 7px;
- height: 30px;
- width: 30px;
+.profile-image {
+    margin-top: 7px;
+    height: 30px;
+    width: 30px;
+    position: relative;
+    display: inline-block;
 }
 
 .contacts{
@@ -49,7 +56,7 @@ table.outgoing_msg td {
 
 .contact-table-scroll{
  overflow-y: scroll;
- height: 600px;
+ height: 690px;
 }
 
 .message-area{
@@ -59,90 +66,17 @@ table.outgoing_msg td {
 
 .message-table-scroll {
     overflow-y: scroll;
-    height: 550px;
+    height: 640px;
     background-image: url('/images/Lan.jpg');
-    background-size: 900px 550px;
+    background-size: 900px 640px;
+    background-repeat: no-repeat;
+
 }
 
 .message-box{
  background-color: #F0F0F0;
 }
-.msgreceive {
-    float:left
-}
-.msgsend {
-    float: right
-}
-.incoming_msg_img {
-    display: inline-block;
-    width: 4%;
-    border: none;
-}
-.received_msg {
-    display: inline-block;
-    padding: 0 0 0 10px;
-    vertical-align: top;
-    width: 92%;
-    border: none;
-}
-.received_withd_msg p {
-    background: #c3fcb8 none repeat scroll 0 0;
-    border-radius: 3px;
-    font-size: 19px;
-    margin: 0;
-    color: #000000;
-    padding: 5px 10px 5px 12px;
-    width: 100%;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    word-wrap: break-word;
-}
-.received_withd_msg {
-    width: 70%;
-    float: left;
-    height: 80px;
-    border: none;
-    /*margin-right:-60px;*/
-}
-.outgoing_msg {
-    border:none;
-    overflow: hidden;
-    margin: 0px 0 10px;
-    display: inline-block;
-    padding: 0 0 0 10px;
-    vertical-align: top;
-    width: 92%;
-   
-}
-.sent_msg p {
-    background: #faf0f0 none repeat scroll 0 0;
-    border-radius: 3px;
-    font-size: 19px;
-    margin: 0;
-    color: #000000;
-    padding: 5px 10px 5px 12px;
-    width: 100%;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    word-wrap: break-word;
-}
-.sent_msg {
-    float: right;
-    border: none;
-    width: 70%;
-    text-align: right;
-    max-width: 340px;
-    border: none;
-}
-.time_date {
-    color: deeppink;
-    display: block;
-    font-size: 10px;
-    margin: 3px 0 0;
-}
-.imgbor {
-    border-radius: 50%;
-    margin-bottom: 4px;
-    border: none;
-}
+
 button{
     border:none;
     border-radius:50%;
@@ -162,4 +96,81 @@ button:active {
 button.launch:hover {
     cursor: pointer;
     background-color: #FABD44;
+}
+.dot {
+    height: 8px;
+    width: 8px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 30px;
+    left:37px;
+}
+.dot-2 {
+    height: 8px;
+    width: 8px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 40px;
+    left: 51px;
+}
+
+.msg_cotainer {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 10px;
+    border-radius: 25px;
+    background-color: #82ccdd;
+    padding: 10px;
+    position: relative;
+    word-wrap: break-word;
+    max-width: 500px;
+}
+
+.msg_cotainer_send {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    border-radius: 25px;
+    background-color: #78e08f;
+    padding: 10px;
+    position: relative;
+    word-wrap :break-word;
+    max-width :500px;
+}
+
+.msg_time {
+    position: absolute;
+    left: 0;
+    bottom: -35px;
+    color: #ed6ee2;
+    font-size: 10px;
+    width: 100px;
+    margin-bottom: 20px;
+    float: left;
+    margin-right: -40px;
+}
+
+.msg_time_send {
+    position: absolute;
+    right: 0;
+    bottom: -35px;
+    color: #ed6ee2;
+    font-size: 10px;
+    width: 100px;
+    margin-bottom: 20px;
+    float: left;
+    margin-right: -40px;
+}
+.img_cont_msg {
+    height: 40px;
+    width: 40px;
+}
+.user_img_msg {
+    height: 40px;
+    width: 40px;
+    border: 1.5px solid #f5f6fa;
 }
